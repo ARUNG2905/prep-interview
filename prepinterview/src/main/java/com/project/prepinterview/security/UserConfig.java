@@ -26,6 +26,7 @@ public class UserConfig {
         .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/users/registercandidate").permitAll()
                 .requestMatchers("/users/registeradmin").permitAll()
+                .requestMatchers("user/generateotp").permitAll()
                 .anyRequest().authenticated())
 
         .formLogin(Customizer.withDefaults())

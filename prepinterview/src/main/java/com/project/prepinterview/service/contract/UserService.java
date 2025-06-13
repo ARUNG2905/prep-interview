@@ -16,4 +16,8 @@ public interface UserService {
     void updateUsername(String newUsername);
 
     void updatePassword(String newPassword);
+
+    void generateotp(String username);
+
+    void forgotPassword(String userName,String newPassword, String otp);
 }

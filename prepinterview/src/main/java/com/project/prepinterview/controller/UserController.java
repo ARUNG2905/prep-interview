@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 @RestController
 public class UserController {
@@ -43,6 +44,19 @@ public class UserController {
         return new ResponseEntity<String>("UserPaswword changed Succesfully",HttpStatus.OK);
 
 
+    }
+
+@GetMapping("user/generateotp")
+public ResponseEntity<String> generateotp(@RequestParam String username){
+    userService.generateotp(username);
+return new ResponseEntity<>("otp is generated",HttpStatus.OK);
+
+}
+    @PutMapping("user/forgotpassword")
+    public ResponseEntity<String> forgotPassword(@RequestParam String userName,@RequestParam String newPassword,@RequestParam String otp){
+
+        userService.forgotPassword(userName,newPassword,otp);
+        return new ResponseEntity<>("new password is update",HttpStatus.OK);
     }
 
 
