@@ -4,7 +4,7 @@ import com.project.prepinterview.entity.User;
 
 public record InterviewSessionResponse(
         String inteviewId,
-        String userName,
+//        String userName,
         String interviewType,
         String userMarks,
         String status

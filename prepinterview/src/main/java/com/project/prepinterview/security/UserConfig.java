@@ -27,6 +27,8 @@ public class UserConfig {
                 .requestMatchers("/users/registercandidate").permitAll()
                 .requestMatchers("/users/registeradmin").permitAll()
                 .requestMatchers("user/generateotp").permitAll()
+                .requestMatchers("/user/candidate-login").permitAll()
+                .requestMatchers("/user/admin-login").permitAll()
                 .anyRequest().authenticated())
 
         .formLogin(Customizer.withDefaults())

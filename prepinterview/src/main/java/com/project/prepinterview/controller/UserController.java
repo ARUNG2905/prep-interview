@@ -1,5 +1,6 @@
 package com.project.prepinterview.controller;
 
+import com.project.prepinterview.dto.request.LoginRequest;
 import com.project.prepinterview.dto.request.UserRequest;
 import com.project.prepinterview.dto.response.UserResponse;
 import com.project.prepinterview.dto.wrapper.ResponseStructure;
@@ -58,7 +59,19 @@ return new ResponseEntity<>("otp is generated",HttpStatus.OK);
         userService.forgotPassword(userName,newPassword,otp);
         return new ResponseEntity<>("new password is update",HttpStatus.OK);
     }
+@PostMapping("/user/candidate-login")
+   public ResponseEntity<ResponseStructure<UserResponse>> loginCandidate(@RequestBody LoginRequest loginRequest){
+        UserResponse userResponse = userService.loginCandidate(loginRequest.email(), loginRequest.password());
+        ResponseStructure<UserResponse> responseStructure = new ResponseStructure<>(HttpStatus.OK.value(), "Login Succesfull",userResponse);
+        return new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure,HttpStatus.OK);
+}
 
+    @PostMapping("/user/admin-login")
+    public ResponseEntity<ResponseStructure<UserResponse>> loginAdmin(@RequestBody LoginRequest loginRequest){
+        UserResponse userResponse = userService.loginAdmin(loginRequest.email(), loginRequest.password());
+        ResponseStructure<UserResponse> responseStructure = new ResponseStructure<>(HttpStatus.OK.value(), "Login Succesfull",userResponse);
+        return new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure,HttpStatus.OK);
+    }
 
 
 }

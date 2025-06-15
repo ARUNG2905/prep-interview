@@ -21,9 +21,9 @@ public class InterviewSession{
     @Column(name = "test_id",updatable = false,nullable = false)
     private String inteviewId;
 
-    @Column(name ="user_name",updatable = false,nullable = false)
-    @ManyToOne
-    private User user;
+//    @Column(name ="user_name",updatable = false,nullable = false)
+//    @ManyToOne
+//    private User user;
 
     @Column(name = "Test_type",updatable = false,nullable = false)
     @Enumerated(EnumType.STRING)
@@ -33,6 +33,7 @@ public class InterviewSession{
     private String userMarks;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status_type",updatable = false,nullable = false)
     private InterviewStatusRole status;
 
     @CreationTimestamp

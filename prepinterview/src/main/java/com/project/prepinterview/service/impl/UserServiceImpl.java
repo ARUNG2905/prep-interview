@@ -7,6 +7,7 @@ import com.project.prepinterview.entity.Admin;
 import com.project.prepinterview.entity.Candidate;
 import com.project.prepinterview.entity.User;
 import com.project.prepinterview.enums.UserRole;
+import com.project.prepinterview.exceptions.BadRoleCredentialException;
 import com.project.prepinterview.exceptions.UserNotFoundByEmailException;
 import com.project.prepinterview.repository.UserRepository;
 import com.project.prepinterview.service.contract.UserService;
@@ -18,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -94,6 +96,46 @@ public class UserServiceImpl implements UserService {
 
                     }
 
+    }
+
+    @Override
+    public UserResponse loginCandidate(String userName, String password) {
+        User user = userRepository.findByEmail(userName).orElseThrow(()-> new UserNotFoundByEmailException("User not found"));
+
+        if(!user.getRole().equals(UserRole.CANDIDATE)){
+            throw new BadRoleCredentialException("Please Login as Candidate");
+        }
+        if(!passwordEncoder.matches(password,user.getPassword())){
+            throw new BadRoleCredentialException("please Enter Correct Password");
+        }
+        user.setLastLogin(LocalDateTime.now());
+        userRepository.save(user);
+        return new UserResponse(
+                user.getUserId(),
+                user.getUserName(),
+                user.getEmail(),
+                user.getRole().name()
+        );
+    }
+
+    @Override
+    public UserResponse loginAdmin(String email, String password) {
+        User user = userRepository.findByEmail(email).orElseThrow(()-> new UserNotFoundByEmailException("User not found"));
+
+        if(!user.getRole().equals(UserRole.ADMIN)){
+            throw new BadRoleCredentialException("Please Login as Candidate");
+        }
+        if(!passwordEncoder.matches(password,user.getPassword())){
+            throw new BadRoleCredentialException("please Enter Correct Password");
+        }
+        user.setLastLogin(LocalDateTime.now());
+        userRepository.save(user);
+        return new UserResponse(
+                user.getUserId(),
+                user.getUserName(),
+                user.getEmail(),
+                user.getRole().name()
+        );
     }
 
     private User getcurrentUser(){

@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 
 @Component
 public class InterviewSessionMapper {
-    @Autowired
-    InterviewSession session;
+//    @Autowired
+//    InterviewSession session;
 
-    public InterviewSession toEntity(InterviewSessionRequest request, User user) {
-        InterviewSession session = new InterviewSession();
-        session.setUser(user);
+    public InterviewSession toEntity(InterviewSessionRequest request, InterviewSession session) {
+//        InterviewSession session = new InterviewSession();
+//        session.setUser(user);
         session.setInterviewType(InterviewRole.valueOf(request.interviewType().toUpperCase()));
         session.setStartTime(LocalDateTime.now());
         session.setEndTime(session.getStartTime().plusMinutes(30));
@@ -32,7 +32,7 @@ public class InterviewSessionMapper {
     public InterviewSessionResponse toResponse(InterviewSession session) {
         return new InterviewSessionResponse(
                 session.getInteviewId(),
-                session.getUser().getUserName(),
+//                session.getUser().getUserName(),
                 session.getInterviewType().toString(),
                 session.getUserMarks(), // Assuming this is a String
                 session.getStatus().toString()

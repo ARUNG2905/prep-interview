@@ -13,6 +13,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -48,5 +50,8 @@ public class User {
 
     @Column(name = "role", nullable = false, updatable = false)
     private UserRole role;
+
+    @Column(name = "Login_time")
+    private LocalDateTime lastLogin;
 
 }

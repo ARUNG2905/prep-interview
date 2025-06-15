@@ -20,4 +20,8 @@ public interface UserService {
     void generateotp(String username);
 
     void forgotPassword(String userName,String newPassword, String otp);
+
+    UserResponse loginCandidate(String userName, String password);
+
+    UserResponse loginAdmin(String email, String password);
 }
