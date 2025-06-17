@@ -110,12 +110,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setLastLogin(LocalDateTime.now());
         userRepository.save(user);
-        return new UserResponse(
-                user.getUserId(),
-                user.getUserName(),
-                user.getEmail(),
-                user.getRole().name()
-        );
+        return userMapper.toResponse(user, password);
     }
 
     @Override
@@ -130,12 +125,8 @@ public class UserServiceImpl implements UserService {
         }
         user.setLastLogin(LocalDateTime.now());
         userRepository.save(user);
-        return new UserResponse(
-                user.getUserId(),
-                user.getUserName(),
-                user.getEmail(),
-                user.getRole().name()
-        );
+        return userMapper.toResponse(user,password);
+
     }
 
     private User getcurrentUser(){
