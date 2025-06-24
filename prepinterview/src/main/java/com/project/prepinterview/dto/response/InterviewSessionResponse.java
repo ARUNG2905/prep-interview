@@ -1,12 +1,13 @@
 package com.project.prepinterview.dto.response;
 
+import com.project.prepinterview.entity.Candidate;
 import com.project.prepinterview.entity.User;
 
 public record InterviewSessionResponse(
-        String inteviewId,
-//        String userName,
+
+        String Candidate,
         String interviewType,
-        String userMarks,
+
         String status
 ) {
 }

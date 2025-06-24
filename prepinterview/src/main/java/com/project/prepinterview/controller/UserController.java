@@ -32,14 +32,14 @@ public class UserController {
         ResponseStructure<UserResponse> responseStructure = new ResponseStructure<>(HttpStatus.CREATED.value(), "Admin is Register",userResponse);
         return new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure,HttpStatus.CREATED);
   }
-  @PutMapping("user/changeusername")
+  @PutMapping("/user/changeusername")
     public ResponseEntity<String> updateUsername(@RequestParam String newUsername){
        userService.updateUsername(newUsername);
         return new ResponseEntity<String>("Username changed Succesfully",HttpStatus.OK);
 
 
   }
-    @PutMapping("user/changepassword")
+    @PutMapping("/user/changepassword")
     public ResponseEntity<String> updatePassword(@RequestParam String newPassword){
         userService.updatePassword(newPassword);
         return new ResponseEntity<String>("UserPaswword changed Succesfully",HttpStatus.OK);
@@ -47,13 +47,13 @@ public class UserController {
 
     }
 
-@GetMapping("user/generateotp")
+@GetMapping("/user/generateotp")
 public ResponseEntity<String> generateotp(@RequestParam String username){
     userService.generateotp(username);
 return new ResponseEntity<>("otp is generated",HttpStatus.OK);
 
 }
-    @PutMapping("user/forgotpassword")
+    @PutMapping("/user/forgotpassword")
     public ResponseEntity<String> forgotPassword(@RequestParam String userName,@RequestParam String newPassword,@RequestParam String otp){
 
         userService.forgotPassword(userName,newPassword,otp);
