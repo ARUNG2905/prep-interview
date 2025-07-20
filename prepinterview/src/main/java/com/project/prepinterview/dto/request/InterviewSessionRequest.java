@@ -4,7 +4,7 @@ import com.project.prepinterview.entity.Candidate;
 import com.project.prepinterview.entity.User;
 
 public record InterviewSessionRequest(
-         String Candidate,
+         String candidateEmail,
          String interviewType
 
 ) {

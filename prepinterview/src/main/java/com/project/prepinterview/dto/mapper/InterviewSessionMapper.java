@@ -12,16 +12,14 @@ import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
 
-@Controller
+@Component
 public class InterviewSessionMapper {
 
 
     public InterviewSession toEntity(InterviewSessionRequest request, InterviewSession session) {
 
         session.setInterviewType(InterviewRole.valueOf(request.interviewType().toUpperCase()));
-        session.setStartTime(LocalDateTime.now());
-        session.setEndTime(session.getStartTime().plusMinutes(30));
-        session.setStatus(InterviewStatusRole.STARTED);
+
 
 
         return session;
@@ -30,7 +28,7 @@ public class InterviewSessionMapper {
 
     public InterviewSessionResponse toResponse(InterviewSession session) {
         return new InterviewSessionResponse(
-                session.getCandidate().toString(),
+                session.getCandidate().getEmail(),
                 session.getInterviewType().toString(),
                 session.getStatus().toString()
         );

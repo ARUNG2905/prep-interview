@@ -8,19 +8,26 @@ import com.project.prepinterview.service.contract.InterviewSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/interview")
 public class InterviewSessionController {
 @Autowired
 private InterviewSessionService interviewSessionService;
-@PostMapping("/schedule-interview")
-public ResponseEntity<ResponseStructure<InterviewSessionResponse>> schedule(@RequestBody InterviewSessionRequest request){
+@PostMapping("/schedule")
+public ResponseEntity<ResponseStructure<InterviewSessionResponse>> schedule(@Validated @RequestBody InterviewSessionRequest request){
 
     InterviewSessionResponse interviewSessionResponse =interviewSessionService.schedule(request);
     ResponseStructure<InterviewSessionResponse> responseStructure = new ResponseStructure<>(HttpStatus.CREATED.value(), "scheduled the interview",interviewSessionResponse);
-    return new ResponseEntity<>(HttpStatus.CREATED);
+    return new ResponseEntity<>(responseStructure,HttpStatus.CREATED);
+}
+
+@GetMapping("/start")
+    public ResponseEntity<ResponseStructure<String>> startInterview(@RequestParam String interviewId){
+    interviewSessionService.startInterview(interviewId);
+    ResponseStructure<String> responseStructure = new ResponseStructure<>(HttpStatus.OK.value(), "Interview Started",interviewId);
+    return new ResponseEntity<>(responseStructure,HttpStatus.OK);
 }
 }

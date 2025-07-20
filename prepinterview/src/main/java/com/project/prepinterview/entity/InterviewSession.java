@@ -19,7 +19,7 @@ public class InterviewSession {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "test_id", updatable = false, nullable = false)
-    private String inteviewId;
+    private String interviewId;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, updatable = false)

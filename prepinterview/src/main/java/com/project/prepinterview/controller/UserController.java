@@ -26,7 +26,7 @@ public class UserController {
         return new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure,HttpStatus.CREATED);
     }
 
-    @PostMapping("users/registeradmin")
+    @PostMapping("/users/registeradmin")
     public ResponseEntity<ResponseStructure<UserResponse>> registerAdmin(@RequestBody UserRequest request){
         UserResponse userResponse = userService.registerAdmin(request);
         ResponseStructure<UserResponse> responseStructure = new ResponseStructure<>(HttpStatus.CREATED.value(), "Admin is Register",userResponse);

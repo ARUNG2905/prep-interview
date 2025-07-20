@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
     public void generateotp(String username) {
         User user = userRepository.findByEmail(username).orElseThrow(()-> new UserNotFoundByEmailException("Email Not found please register"));
         String otp = String.valueOf(999*(new Random().nextInt(1,10)));
-        System.out.println(otp);
+//        System.out.println(otp);
         otpStore.put(otp,username);
         sendOtpEmail(username,otp);
 

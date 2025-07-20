@@ -5,4 +5,6 @@ import com.project.prepinterview.dto.response.InterviewSessionResponse;
 
 public interface InterviewSessionService {
     InterviewSessionResponse schedule(InterviewSessionRequest request);
+
+    void startInterview(String interviewId);
 }
